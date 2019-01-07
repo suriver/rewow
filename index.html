@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="css/onsenui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/onsen-css-components.min.css">
+	<script src="js/onsenui.min.js"></script>
+
+	<title>Rewang Online</title>
+
+	<!-- <script src="phonegap.js"></script> -->
+
+</script>
+<style type="text/css">
+.img{
+	background: #f5f5f5;
+}
+.corsel{
+	background: #4b0082;
+}
+</style>
+</head>
+<body>
+	<ons-splitter>
+		<ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+		</ons-splitter-side>
+		<ons-splitter-content id="content" page="opening.html"></ons-splitter-content>
+	</ons-splitter>
+
+	<template id="opening.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="right">
+					<ons-toolbar-button>
+						<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo_rewo.jpg">
+					</ons-toolbar-button>
+				</div>
+				<div class="center">
+					Rewang Online
+				</div>
+			</ons-toolbar>
+			<div class="card card--material">
+				<img src="image/sale.jpg" style="width: 70%; display: block; margin-left: auto; margin-right: auto;" class="center">
+				<div class="content">
+					<p align="justify">Selamat Datang di REWO!</p>
+					<p>Menyediakan Jasa Pekerja Masak Profesional</p>
+					<ons-button onclick="showTemplateDialog()">Masuk</ons-button>
+					<ons-button onclick="fn.load('daftar.html')">Daftar</ons-button>
+				</div>
+			</div>
+		</ons-page>
+	</template>
+
+	<template id="login.html">
+		<ons-dialog id="my-dialog">
+			<div style="text-align: center; padding: 10px;">
+				<center><h4>Login</h4></center>
+				<p>
+					<ons-input id="user" modifier="underbar" placeholder="Username" float autofocus></ons-input>
+				</p>
+				<p>
+					<ons-input id="pass" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+				</p>
+				<p>
+					<ons-button onclick="hideDialog('my-dialog'); login();">Masuk</ons-button>
+					<ons-button onclick="hideDialog('my-dialog')">Batal</ons-button>
+				</p>
+			</div>
+		</ons-dialog>
+	</template>
+
+	<template id="daftar.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="left">
+					<ons-back-button onclick="fn.load('opening.html')"></ons-back-button>
+				</div>
+				<div class="center">
+					Daftar
+				</div>
+			</ons-toolbar>
+			<ons-card>
+				<div style="text-align: center; padding: 10px;">
+					<p>NIK</p>
+					<p>
+						<ons-input id="nik" modifier="underbar" placeholder="NIK" type="text"></ons-input>
+					</p>
+					<p>User</p>
+					<p>
+						<ons-input id="user" modifier="underbar" placeholder="Username" type="text"></ons-input>
+					</p>
+					<p>Alamat</p>
+					<p>
+						<ons-input id="alamat" modifier="underbar" placeholder="Alamat" type="text"></ons-input>
+					</p>
+					<p>Email</p>
+					<p>
+						<ons-input id="email" modifier="underbar" placeholder="name@email.com" type="text"></ons-input>
+					</p>
+					<p>Nomor HP</p>
+					<p>
+						<ons-input id="nohp" modifier="underbar" placeholder="+62" min="12" max="15" type="text"></ons-input>
+					</p>
+					<p>Password</p>
+					<p>
+						<ons-input id="pass" modifier="underbar" placeholder="password" min="12" max="15" type="password"></ons-input>
+					</p>
+					<p>
+						<ons-button onclick="daftar(); fn.load('opening.html')">Daftar</ons-button>
+					</p>
+				</div>
+			</ons-card>
+		</ons-page>
+	</template>
+	
+	<template id="home.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="right">
+					<ons-toolbar-button>
+						<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo_rewo.jpg">
+					</ons-toolbar-button>
+				</div>
+				<div class="center">
+					Rewang Online
+				</div>
+			</ons-toolbar>
+			<ons-tabbar swipeable position="auto">
+				<div class="tabbar tabbar--top tabbar--top-border">
+					<ons-tab page="beranda.html" label="Beranda" icon="fa-home" active></ons-tab>
+					<ons-tab page="pesanan.html" label="Pesanan" icon="fa-shopping-basket"></ons-tab>
+					<ons-tab page="bantuan.html" label="Bantuan" icon="fa-list"></ons-tab>
+					<ons-tab page="akun.html" label="Akun" icon="fa-user"></ons-tab>
+				</div>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<template id="home2.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="right">
+					<ons-toolbar-button>
+						<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo_rewo.jpg">
+					</ons-toolbar-button>
+				</div>
+				<div class="center">
+					Rewang Online
+				</div>
+			</ons-toolbar>
+			<ons-tabbar swipeable position="auto">
+				<div class="tabbar tabbar--top tabbar--top-border">
+					<ons-tab page="beranda.html" label="Beranda" icon="fa-home" ></ons-tab>
+					<ons-tab page="pesanan.html" label="Pesanan" icon="fa-shopping-basket" active></ons-tab>
+					<ons-tab page="bantuan.html" label="Bantuan" icon="fa-list" ></ons-tab>
+					<ons-tab page="akun.html" label="Akun" icon="fa-user"></ons-tab>
+				</div>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<template id="home3.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="right">
+					<ons-toolbar-button>
+						<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo_rewo.jpg">
+					</ons-toolbar-button>
+				</div>
+				<div class="center">
+					Rewang Online
+				</div>
+			</ons-toolbar>
+			<ons-tabbar swipeable position="auto">
+				<div class="tabbar tabbar--top tabbar--top-border">
+					<ons-tab page="beranda.html" label="Beranda" icon="fa-home" ></ons-tab>
+					<ons-tab page="pesanan.html" label="Pesanan" icon="fa-shopping-basket"></ons-tab>
+					<ons-tab page="bantuan.html" label="Bantuan" icon="fa-list" active></ons-tab>
+					<ons-tab page="akun.html" label="Akun" icon="fa-user"></ons-tab>
+				</div>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+	<template id="home4.html">
+		<ons-page>
+			<ons-toolbar>
+				<div class="right">
+					<ons-toolbar-button>
+						<img class="list-item__thumbnail" style="width: 35px; height: 35px; padding: 10px 0 0 0;" src="image/logo_rewo.jpg">
+					</ons-toolbar-button>
+				</div>
+				<div class="center">
+					Rewang Online
+				</div>
+			</ons-toolbar>
+			<ons-tabbar swipeable position="auto">
+				<div class="tabbar tabbar--top tabbar--top-border">
+					<ons-tab page="beranda.html" label="Beranda" icon="fa-home" ></ons-tab>
+					<ons-tab page="pesanan.html" label="Pesanan" icon="fa-shopping-basket"></ons-tab>
+					<ons-tab page="bantuan.html" label="Bantuan" icon="fa-list" ></ons-tab>
+					<ons-tab page="akun.html" label="Akun" icon="fa-user" active></ons-tab>
+				</div>
+			</ons-tabbar>
+		</ons-page>
+	</template>
+
+
+	<template id="beranda.html">
+		<ons-page>
+			<ons-card>
+				<img src="image/promo.png" style="width: 100%; display: block; margin-left: auto; margin-right: auto;" class="center"><br>
+				<ons-row style="align: justify;">
+					<ons-col width="50%">
+						<center><img src="image/chef.png" style="width: 75%" onclick="fn.load('chef.html')"><br></center><font color="#4b0082" size="2px"><center><b>CHEF</b></center></font>
+					</ons-col>
+					<ons-col width="50%">
+						<center><img src="image/food.png" style="width: 75%" onclick="fn.load('food.html')"><br></center><font color="#4b0082" size="2px"><center><b>FOOD</b></center></font>
+					</ons-col>					
+				</ons-row>
+			</ons-card>
+			<ons-card>
+				<center>
+					<ons-row>
+						<ons-col width="20%">
+							<ons-button onclick="prev()" class="corsel">
+								<ons-icon icon="md-chevron-left"></ons-icon>
+							</ons-button>
+						</ons-col>
+						<ons-col width="60%">
+							<ons-carousel fullscreen swipeable auto-scroll overscrollable id="carousel">
+								<ons-carousel-item>
+									<img src="image/corousel1.png" style="width: 100%">
+								</ons-carousel-item>
+								<ons-carousel-item>
+									<img src="image/corousel2.png" style="width: 100%">
+								</ons-carousel-item>
+							</ons-carousel>
+						</ons-col>
+						<ons-col width="20%">
+							<ons-button onclick="next()" class="corsel">
+								<ons-icon icon="md-chevron-right"></ons-icon>
+							</ons-button>
+						</ons-col>
+					</ons-row>
+				</center>
+				
+			</ons-card>
+		</ons-page>
+	</template>
+
+	<template id="pesanan.html">
+		<ons-page>
+			<ons-card>
+				<ons-select id="paket" style="width: 100%" onchange="biaya()">
+					<option value=""> Pilih Paket Pekerja</option>
+				    <option value="duo">Paket Duo Rewo </option>
+				    <option value="trio">Paket Trio Rewo</option>
+				    <option value="rombongan">Paket Rombongan Rewo</option>
+				    <option value="rame">Paket Rewo Rame-rame</option>
+				</ons-select>	
+				<p>
+					<input type="text" style="width: 85%; margin: 0 auto;" class="text-input text-input--underbar" id="hpaket" placeholder=""  value="" readonly>/hari
+				</p>
+				<p>
+				  <ons-input id="lama" modifier="underbar" placeholder="berapa hari" style="width: 100%"></ons-input>
+			    </p>
+			    <p>
+			    	<ons-select id="food" style="width: 100%";>
+					<option value="">Pilih Paket Menu</option>
+				    <option value="saphire">Saphire </option>
+				    <option value="zambrud">Zambrud</option>
+				    <option value="diamond">Diamond</option>
+				</ons-select>
+			    </p>
+				<p>
+				  <ons-input id="tanggal" modifier="underbar" type="date" placeholder="mm/dd/yyyy Tanggal resepsi" style="width: 100%"></ons-input>
+			    </p>
+				<p>
+				  <ons-input id="tempat" modifier="underbar" placeholder="Tempat" style="width: 100%"></ons-input>
+			    </p>
+			    <p>
+			   		<ons-input id="penanggung" modifier="underbar" placeholder="Penanggung Jawab" style="width: 100%" ></ons-input>
+			 	</p>
+				<p>
+				   <ons-input id="nohp2" modifier="underbar" placeholder="Nomor Hp" style="width: 100%" ></ons-input>
+				</p>
+				<ons-select id="metode" style="width: 100%";>
+					<option value="">Pembayaran</option>
+				    <option value="indo">Indomart </option>
+				    <option value="alfa">Alfamart</option>
+				    <option value="bri">BRI </option>
+				    <option value="bni">BNI</option>
+				</ons-select>
+				<p>
+					<ons-button onclick="pesan(); cetak()">Kirim</ons-button>
+				</p>
+			</ons-card>
+		</ons-page>
+	</template>
+
+	<template id="akun.html">
+		<ons-page>
+			<section style="padding: 8px">
+				<ons-list>
+					<ons-list-item>
+						<span class="list-item__title">Evir</span><span class="list-item__subtitle">viviaeka.ve@gmail.com</span>
+					</ons-list-item>
+				</ons-list><br>
+				<ons-list>
+					<ons-list-item onclick="fn.loadLink('https://www.facebook.com/karmavivioke/?modal=suggested_action&notif_id=1545876263252186&notif_t=page_fan')">
+						Sambungkan dengan Facebook<hr><ons-button icon = "fa-facebook"></ons-button>
+					</ons-list-item>
+				</ons-list><br>
+				<ons-list>
+					<ons-list-item onclick="fn.load('Riwayat.html')" tappable>
+						<div class="left">
+							<ons-icon icon="fa-google-wallet" class="list-item__icon"></ons-icon>
+						</div>
+						<div class="center">
+							Riwayat Pemesanan
+						</div>
+					</ons-list-item>
+					<!-- <section style="padding: 8px"> -->
+						<ons-list-item onclick="fn.load('Voucher.html')" tappable>
+							<div class="left">
+								<ons-icon icon="fa-id-card" class="list-item__icon"></ons-icon>
+							</div>
+							<div class="center">
+								Voucher Saya
+							</div>
+						</ons-list-item>
+						<ons-list-item onclick="fn.load('about.html')" tappable>
+							<div class="left">
+								<ons-icon icon="fa-credit-card" class="list-item__icon"></ons-icon>
+							</div>
+							<div class="center">
+								About
+							</div>
+						</ons-list-item>
+					</ons-list><br>
+					<ons-list>
+						<ons-list-item onclick="fn.load('ketentuan.html')" tappable>
+							<div class="left">
+								<ons-icon icon="fa-list-ul" class="list-item__icon"></ons-icon>
+							</div>
+							<div class="center">
+								Ketentuan Layanan
+							</div>
+						</ons-list-item>
+						<ons-list-item onclick="fn.load('kebijakan.html')" tappable>
+							<div class="left">
+								<ons-icon icon="fa-user-secret" class="list-item__icon"></ons-icon>
+							</div>
+							<div class="center">
+								Kebijakan Privasi
+							</div>
+						</ons-list-item>
+						<ons-list-item onclick="fn.load('home3.html')" tappable>
+							<div class="left">
+								<ons-icon icon="fa-tasks" class="list-item__icon"></ons-icon>
+							</div>
+							<div class="center">
+								Bantuan
+							</div>
+						</ons-list-item>
+						<ons-list-item onclick="fn.loadLink('https://www.instagram.com/rewangonline/?hl=id')" tappable>
+							<div class="left">
+								<ons-icon class="list-item__icon" icon="ion-social-instagram"></ons-icon>
+							</div>
+							<div class="center">
+								Instagram
+							</div>
+						</ons-list-item>
+					</ons-list><br>
+					<ons-list>
+						<ons-list-item onclick="fn.load('opening.html')" tappable>
+							<center><font color="red">Keluar</font></center>
+						</ons-list-item>
+					</ons-list>
+				</section>
+				<ons-fab position="bottom right" onclick="fn.load('chat.html')">
+					<ons-icon icon="fa-wechat"></ons-icon>
+				</ons-fab>
+			</ons-page>
+		</template>
+
+		<template id="bantuan.html">
+			<ons-page>
+				<section style="padding: 8px">
+					<ons-list>
+						<ons-list-item modifier="chevron" onclick="fn.load('help1.html')" tappable>Cara memesan jasa Rewo</ons-list-item>
+					</ons-list><br>
+					<ons-list>
+						<ons-list-item modifier="chevron" onclick="fn.load('help2.html')" tappable>Cara melihat skill Para Rewo</ons-list-item>
+					</ons-list><br>
+					<ons-list>
+						<ons-list-item modifier="chevron" onclick="fn.load('help3.html')" tappable>Cara mengetahui tarif biaya sewa</ons-list-item>
+					</ons-list><br>
+				</section>
+			</ons-page>
+		</template>
+
+
+		<!-- ===================================== TEMPLATE SUB BANTUAN ==================================== -->
+
+		<template id="help1.html">
+			<ons-page>
+				<ons-toolbar>
+					<div class="left">
+						<ons-back-button onclick="fn.load('home3.html')"></ons-back-button>
+					</div>
+					<div class="center">
+						Back
+					</div>
+				</ons-toolbar>
+				<ons-card>
+					<div class="title"><font color="blue">Cara memesan jasa Rewo</font></div>
+					<div class="content">
+						<div>
+							<ons-button><ons-icon icon="ion-thumbsup" onclick="fn.load('info.html')"></ons-icon></ons-button>
+							<ons-button><ons-icon icon="ion-share"></ons-icon></ons-button>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
+						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					</div>
+				</ons-card>
+			</ons-page>
+		</template><br>
+
+		<template id="help2.html">
+			<ons-page>
+				<ons-toolbar>
+					<div class="left">
+						<ons-back-button onclick="fn.load('home3.html')"></ons-back-button>
+					</div>
+					<div class="center">
+						Back
+					</div>
+				</ons-toolbar>
+				<ons-card>
+					<div class="title"><font color="blue">Cara memesan jasa Rewo</font></div>
+					<div class="content">
+						<div>
+							<ons-button><ons-icon icon="ion-thumbsup" onclick="fn.load('info.html')"></ons-icon></ons-button>
+							<ons-button><ons-icon icon="ion-share"></ons-icon></ons-button>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
+						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					</div>
+				</ons-card>
+			</ons-page>
+		</template>
+		
+		<!-- =========================================  TEMPLATE AKUN ======================================== -->
+		<template id="Riwayat.html">
+			<ons-page>
+				<ons-toolbar>
+					<div class="left">
+						<ons-back-button onclick="fn.load('home4.html')">Back</ons-back-button>
+					</div>
+					<div class="center">
+						Riwayat Pesanan
+					</div>
+				</ons-toolbar>
+				<div style="height: 200px; padding: 1px 0 0 0;">
+					<div class="card card--material">
+						<div>
+							<img src="image/list.png" width="100%">
+						</div>
+						<br>
+						<div class="card__title card--material__title" style="text-align: center">
+							Pesan Juru Masak Yuk!
+						</div>
+						<div class="card__content card--material__content" style="text-align: justify;">
+							Juru Masak kami akan datang membantu anda dengan senang hati 
+						</div>
+						<br>
+					</div>
+				</div>
+			</ons-page>
+		</template>
+
+		<template id="Voucher.html">
+			<ons-page>
+				<ons-toolbar>
+					<div class="left">
+						<ons-back-button onclick="fn.load('home4.html')">Back</ons-back-button>
+					</div>
+					<div class="center">
+						Voucher Saya
+					</div>
+				</ons-toolbar>
+				<div style="height: 200px; padding: 1px 0 0 0;">
+					<div class="card card--material">
+						<div>
+							<img src="image/vocher.jpg" width="100%">
+						</div>
+						<br>
+						<div class="card__title card--material__title" style="text-align: center">
+							KUMPULKAN VOUCHER YUKKKK !
+						</div>
+						<div class="card__content card--material__content" style="text-align: justify;">
+							Buanyaaak voucher amazing dengan harga promo! Terus lakukan transaksi untuk menikmati potongan harga yang wowww . 
+						</div>
+						<br>
+					</div>
+				</div>
+			</ons-page>
+		</template>
+
+		<template id="about.html">
+			<ons-page>
+				<ons-toolbar>
+					<div class="left">
+						<ons-back-button onclick="fn.load('home4.html')">Back</ons-back-button>
+					</div>
+					<div class="center">
+						About
+					</div>
+				</ons-toolbar>
+				<div style="height: 200px; padding: 1px 0 0 0;">
+					<div class="card card--material">
+						<div class="card__title card--material__title">Tentang Kami</div>
+						<div class="card__content card--material__content">
+							<div class="card__content card--material__content" style="text-align: justify;">
+								Aplikasi <b>Rewang Online (Rewo) </b> v.1.0.1 
+							</div>
+						</div>
+						<br>
+						<div class="card__content card--material__content">
+							<div class="card__content card--material__content" style="text-align: justify;">
+								Silakan hubungi jika ada pertanyaan maupun jika menemukan bug melalui media yang tersedia di bawah ini.
+							</div>
+						</div>
+					</div>
+					<ons-list modifier="inset">
+						<ons-list-item>
+							<div class="left">
+								<i class="fa fa-map-o fa-2x" aria-hidden="true"></i>
+							</div>
+							<div class="center">
+								<span class="list-item__title">Alamat</span><span class="list-item__subtitle">STMIK Widya Pratama, Jl Patriot No.25 Pekalongan</span>
+							</div>
+						</ons-list-item>
+						<ons-list-item>
+							<div class="left">
+								<i class="fa fa-whatsapp fa-2x" aria-hidden="true"></i>
+							</div>
+							<div class="center">
+								<span class="list-item__title">Whatsapp</span><span class="list-item__subtitle">+628527836991</span>
+							</div>
+						</ons-list-item>
+						<ons-list-item>
+							<div class="left">
+								<i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i>
+							</div>
+							<div class="center">
+								<span class="list-item__title">Email</span><span class="list-item__subtitle">rewangonline@gmail.com</span>
+							</div>
+						</ons-list-item>
+					</ons-list>
+				</div>
+			</ons-page>
+		</template>
+
+		<template id="ketentuan.html">
+			<ons-page>
+				<ons-toolbar>
+					<div class="left">
+						<ons-back-button onclick="fn.load('home4.html')">Back</ons-back-button>
+					</div>
+					<div class="center">
+						Ketentuan Layanan
+					</div>
+				</ons-toolbar>
+				<section style="padding: px">
+
+					<ons-list-header style="background-color: #33ccff"><b>REWO </b><br> Terms Of Service</ons-list-header>
+					<ons-list-item expandable>
+						Ketentuan Pengguna
+						<br>
+						<div class="expandable-content" style="background-color: #81d4fa">
+							<center>Dengan Mengunduh, memasang atau menggunakan Aplikasi Rewang Online (Rewo)
+								anda setuju bahwa anda telah membaca, memahami dan menerima Ketentuan Penggunaan ini
+								(Ketentuan Pengguna). <br>Ketentuan Penggunaan ini merupakan suatu perjanjian sah antara anda dan Pencipta Rewang Online (Rewo). <br> <b>MOHON ANDA MEMERIKSA KETENTUAN PENGGUNAAN DAN KEBIJAKAN PRIVASI KAMI DENGAN SEKSAMA SEBELUM MENGUNDUH APLIKASI ATAU MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI</b></center>
+							</div>
+						</ons-list-item>
+						<ons-list-item expandable>
+							Syarat dan Ketentuan
+							<br>
+							<div class="expandable-content" style="background-color: #81d4fa">
+								<center>
+									1. Pelanggan wajib memberikan informasi yang benar dan lengkap mengenai acara yang akan diadakan.<br>
+									2. Para pekerja/juru masak di <b>Rewang Online (Rewo)</b> sudah mendapatkan pengarahan untuk melaksanakan tugasnya sebagai juru masak yang akan bekerja untuk anda dengan sepenuh hati.<br>
+									3. <b>Rewang Online (Rewo)</b> tidak bertanggung jawab secara langsung perihal kendala oleh pekerja yang dilakukan baik sengaja maupun tidak.<br>
+									<br>
+									<br>
+									***** Syarat dan Ketentuan Berlaku *****
+								</center>
+							</div>
+						</ons-list-item>
+					</ons-page>
+				</template>
+
+				<template id="kebijakan.html">
+					<ons-page>
+						<ons-toolbar>
+							<div class="left">
+								<ons-back-button onclick="fn.load('home4.html')">Back</ons-back-button>
+							</div>
+							<div class="center">
+								Kebijakan Privasi
+							</div>
+						</ons-toolbar>
+						<section style="padding: px">
+
+							<ons-list-header style="background-color: #33ccff"><b>REWO </b><br> Privacy Policy</ons-list-header>
+							<ons-card>
+								<div class="left">
+									<img src="image/logo_rewo.jpg" style="width: 100%">
+									<br>
+									<br>
+									Effective Date : January 20th 2019
+								</ons-page>
+							</template>					
+
+							<!-- =========================================  TEMPLATE ICON  ======================================== -->
+							<template id="food.html">
+								<ons-page>
+									<!-- <section style="padding: 8px"> -->
+										<ons-toolbar>
+											<div class="left">
+												<ons-back-button onclick="fn.load('home.html')">Back</ons-back-button>
+											</div>
+											<div class="center">
+												Paket Masakan
+											</div>
+										</ons-toolbar>
+
+
+										<section style="padding: 8px">
+											<ons-list>
+												<ons-list-item modifier="chevron" onclick="fn.load('saphire.html')" tappable>Saphire</ons-list-item>
+											</ons-list><br>
+											<ons-list>
+												<ons-list-item modifier="chevron" onclick="fn.load('zamrud.html')" tappable>Zamrud</ons-list-item>
+											</ons-list><br>
+											<ons-list>
+												<ons-list-item modifier="chevron" onclick="fn.load('diamond.html')" tappable>Diamond</ons-list-item>
+											</ons-list><br>
+										</section>
+								</ons-page>
+							</template>
+
+							<template id="chef.html">
+								<ons-page>
+									<!-- <section style="padding: 8px"> -->
+										<ons-toolbar>
+											<div class="left">
+												<ons-back-button onclick="fn.load('home.html')">Back</ons-back-button>
+											</div>
+											<div class="center">
+												Paket Chef Rewo
+											</div>
+										</ons-toolbar>
+
+
+										<section style="padding: 8px">
+											<ons-list>
+												<ons-list-item modifier="chevron" onclick="fn.load('duo.html')" tappable>Paket Duo Rewo</ons-list-item>
+											</ons-list><br>
+											<ons-list>
+												<ons-list-item modifier="chevron" onclick="fn.load('trio.html')" tappable>Paket Trio Rewo </ons-list-item>
+											</ons-list><br>
+											<ons-list>
+												<ons-list-item modifier="chevron" onclick="fn.load('rombongan.html')" tappable>Paket Rombongan Rewo</ons-list-item>
+											</ons-list><br>
+											<ons-list>
+												<ons-list-item modifier="chevron" onclick="fn.load('rame.html')" tappable>Paket Rewo Rame-Rame</ons-list-item>
+											</ons-list><br>
+										</section>
+								</ons-page>
+							</template>
+
+							<!-- =========================================  TEMPLATE FOOD  ======================================== -->
+
+							<template id="saphire.html">
+								<ons-page>
+									<ons-toolbar>
+										<div class="left">
+											<ons-back-button onclick="fn.load('food.html')">Back</ons-back-button>
+										</div>
+										<div class="center">
+											Saphire
+										</div>
+									</ons-toolbar>
+									<ons-list-header>Jenis Masakan Yang Di Sediakan</ons-list-header>
+									<ons-list-item>
+										<div class="left">
+											<img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+										</div>
+										<div class="center">
+											<span class="list-item__title">Nasi Putih</span><span class="list-item__subtitle"></span>
+										</div>
+									</ons-list-item>
+									<ons-list-item>
+										<div class="left">
+											<img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+										</div>
+										<div class="center">
+											<span class="list-item__title">Daging</span><span class="list-item__subtitle">Semur Daging, Dendeng Balado</span>
+										</div>
+									</ons-list-item>
+									<ons-list-item>
+										<div class="left">
+											<img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+										</div>
+										<div class="center">
+											<span class="list-item__title">Ayam</span><span class="list-item__subtitle">Ayam Goreng, Ayam Bakar, Ayam Panggang, Opor Ayam</span>
+										</div>
+									</ons-list-item>
+									<ons-list-item>
+										<div class="left">
+											<img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+										</div>
+										<div class="center">
+											<span class="list-item__title">Sayur</span><span class="list-item__subtitle">Sayur Sop, Sayur Asem, Sayur Lodeh </span>
+										</div>
+									</ons-list-item>
+								</ons-page>
+								
+							</template>
+
+
+							<ons-modal direction="up">
+								<div style="text-align: center">
+									<p>
+										<ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+									</p>
+								</div>
+							</ons-modal>
+
+							<!-- <script type="text/javascript">
+								
+							</script> -->
+							<script src="js/main.js"></script>
+						</body>
+						</html>
